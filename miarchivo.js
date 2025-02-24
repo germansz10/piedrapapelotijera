@@ -1,8 +1,9 @@
 function obtenerNombreJugador() {
-    let nombre = prompt('Bienvenido al piedra, papel o tijera ¿Cómo te llamas?').trim();
+    let nombre = prompt('Bienvenido al piedra, papel o tijera. Gana el juego el primero en lograr 3 victorias ¿Cómo te llamas?').trim();
     if (nombre === "") {
-        console.log('Hola desconocido');
-        return "Desconocido";
+        alert('No ingresaste un nombre, te llamare Lisa junior.');
+        console.log('Hola Lisa junior');
+        return "Lisa junior";
     }
     console.log('Hola ' + nombre);
     return nombre;
@@ -11,7 +12,7 @@ function obtenerNombreJugador() {
 function obtenerJugadaJugador(juego) {
     let jugada;
     do {
-        jugada = prompt('¿Qué eliges? Piedra, papel o tijera?').toLowerCase().trim();
+        jugada = prompt('¿Qué eliges? Piedra🪨 , papel📃 o tijera ✂️?').toLowerCase().trim();
         if (!juego.includes(jugada)) {
             alert('Elección inválida. Debe ser piedra, papel o tijera.');
         }
@@ -38,15 +39,18 @@ function determinarGanador(jugadaJugador, jugadaMaquina) {
 }
 
 function mostrarPuntuacion(nombreJugador, ganoJugador, ganoMaquina) {
-    alert(`Puntuación: ${nombreJugador} ${ganoJugador} - Máquina ${ganoMaquina}`);
+    alert(`Puntuación: 🧑‍💻${nombreJugador} ${ganoJugador} - 🤖 Máquina  ${ganoMaquina}`);
 }
 
 function jugarDeNuevo() {
-    let respuesta = prompt('¿Querés volver a jugar? Ingrese "si" o "no"').toLowerCase().trim();
+    let respuesta = prompt('¿Querés volver a jugar? Ingrese "si" o "no" o presione tecla cualquiera').toLowerCase().trim();
     if (respuesta === 'si') {
         jugarPiedraPapelTijera();
-    } else {
-        alert('¡Gracias por jugar!');
+    } else if (respuesta === 'no') {
+        alert('¡Gracias por jugar! vuelva prontos');
+    }   else {  
+        alert('No hay tecla cualquiera. Ingrese "si" o "no"');
+        jugarDeNuevo();
     }
 }
 
@@ -60,18 +64,17 @@ function jugarPiedraPapelTijera() {
         let jugadaJugador = obtenerJugadaJugador(juego);
         let jugadaMaquina = obtenerJugadaMaquina(juego);
 
-        alert(`Elegiste: ${jugadaJugador}`);
-        alert(`La máquina eligió: ${jugadaMaquina}`);
+        alert(`🧑‍💻 Tu Eleccion: ${jugadaJugador.toUpperCase()} \n🤖 Maquina: ${jugadaMaquina.toUpperCase()}`);
 
         let resultado = determinarGanador(jugadaJugador, jugadaMaquina);
 
         if (resultado === "empate") {
             alert('Empate');
         } else if (resultado === "jugador") {
-            alert('¡Ganaste esta ronda!');
+            alert('¡Ganaste esta ronda! 🎉');
             ganoJugador++;
         } else {
-            alert('Perdiste esta ronda.');
+            alert('Perdiste esta ronda.😢');
             ganoMaquina++;
         }
 
@@ -81,7 +84,7 @@ function jugarPiedraPapelTijera() {
     if (ganoJugador === 3) {
         alert('¡Felicidades! Ganaste el juego 🎉');
     } else {
-        alert('La máquina ganó el juego. ¡Suerte la próxima!');
+        alert('La máquina ganó el juego.😢 ¡Suerte la próxima! ');
     }
 
     jugarDeNuevo();
