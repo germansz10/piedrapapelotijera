@@ -3,10 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Juego piedra papel o tijera</title>
+    <title>Piedra, Papel o Tijera</title>
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <h1>piedra papel o tijera</h1>
+    <h1>Piedra, Papel o Tijera</h1>
+    <div id="nombreJugador">
+        <label for="nombre">Tu Nombre:</label>
+        <input type="text" id="nombre" placeholder="Ingresa tu nombre">
+        <button id="iniciar">Iniciar Juego</button>
+    </div>
+    
+    <div id="juego" style="display: none;">
+        <p id="mensaje"></p>
+        <button class="opcion" data-jugada="piedra">🪨 Piedra</button>
+        <button class="opcion" data-jugada="papel">📃 Papel</button>
+        <button class="opcion" data-jugada="tijera">✂️ Tijera</button>
+        
+        <p id="resultado"></p>
+        <p>Puntaje: <span id="puntajeJugador">0</span> - <span id="puntajeMaquina">0</span></p>
+        <button id="reiniciar">Reiniciar Juego</button>
+    </div>
+    
     <script src="miarchivo.js"></script>
 </body>
 </html>
