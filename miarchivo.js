@@ -11,6 +11,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const historialJugadorSpan = document.getElementById("historialJugador");
     const historialMaquinaSpan = document.getElementById("historialMaquina");
     const resetHistorialBtn = document.getElementById("resetHistorial");
+    const resetNombreBtn = document.getElementById("resetNombre");
 
     let nombreJugador = localStorage.getItem("nombreJugador") || "";
     let puntajeJugador = 0;
@@ -26,12 +27,19 @@ document.addEventListener("DOMContentLoaded", () => {
         actualizarHistorial();
     }
 
-    iniciarBtn.addEventListener("click", () => {
+    function iniciarJuego() {
         nombreJugador = nombreInput.value.trim() || "Lisa junior";
         localStorage.setItem("nombreJugador", nombreJugador);
         mensaje.textContent = `Hola ${nombreJugador}, elige tu jugada:`;
         document.getElementById("nombreJugador").style.display = "none";
         juegoDiv.style.display = "block";
+    }
+
+    iniciarBtn.addEventListener("click", iniciarJuego);
+    nombreInput.addEventListener("keypress", (event) => {
+        if (event.key === "Enter") {
+            iniciarJuego();
+        }
     });
 
     opciones.forEach(boton => {
@@ -67,6 +75,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     reiniciarBtn.addEventListener("click", reiniciarJuego);
     resetHistorialBtn.addEventListener("click", resetearHistorial);
+    resetNombreBtn.addEventListener("click", resetearNombre);
 
     function determinarGanador(jugador, maquina) {
         if (jugador === maquina) return "empate";
@@ -97,6 +106,11 @@ document.addEventListener("DOMContentLoaded", () => {
         localStorage.setItem("historialMaquina", 0);
         actualizarHistorial();
         alert("Historial reiniciado");
+    }
+
+    function resetearNombre() {
+        localStorage.removeItem("nombreJugador");
+        location.reload();
     }
 
     function actualizarHistorial() {
