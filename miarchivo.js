@@ -1,3 +1,4 @@
+//conectp el archivo js con el html
 document.addEventListener("DOMContentLoaded", () => {
     const nombreInput = document.getElementById("nombre");
     const iniciarBtn = document.getElementById("iniciar");
@@ -12,21 +13,21 @@ document.addEventListener("DOMContentLoaded", () => {
     const historialMaquinaSpan = document.getElementById("historialMaquina");
     const resetHistorialBtn = document.getElementById("resetHistorial");
     const resetNombreBtn = document.getElementById("resetNombre");
-
+//inicializo las variables
     let nombreJugador = localStorage.getItem("nombreJugador") || "";
     let puntajeJugador = 0;
     let puntajeMaquina = 0;
     let historialJugador = parseInt(localStorage.getItem("historialJugador")) || 0;
     let historialMaquina = parseInt(localStorage.getItem("historialMaquina")) || 0;
     const opcionesJuego = ["piedra", "papel", "tijera"];
-
+//si el nombre del jugador esta guardado en el local storage, se muestra el mensaje
     if (nombreJugador) {
         mensaje.textContent = `Hola ${nombreJugador}, elige tu jugada:`;
         document.getElementById("nombreJugador").style.display = "none";
         juegoDiv.style.display = "block";
         actualizarHistorial();
     }
-
+//funcion para iniciar el juego
     function iniciarJuego() {
         nombreJugador = nombreInput.value.trim() || "Lisa junior";
         localStorage.setItem("nombreJugador", nombreJugador);
@@ -34,14 +35,14 @@ document.addEventListener("DOMContentLoaded", () => {
         document.getElementById("nombreJugador").style.display = "none";
         juegoDiv.style.display = "block";
     }
-
+//inicia el juego presionando enter
     iniciarBtn.addEventListener("click", iniciarJuego);
     nombreInput.addEventListener("keypress", (event) => {
         if (event.key === "Enter") {
             iniciarJuego();
         }
     });
-
+//selecciona la jugada del jugador y de la maquina
     opciones.forEach(boton => {
         boton.addEventListener("click", () => {
             let jugadaJugador = boton.dataset.jugada;
@@ -58,7 +59,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
             puntajeJugadorSpan.textContent = puntajeJugador;
             puntajeMaquinaSpan.textContent = puntajeMaquina;
-
+//si el jugador o la maquina llegan a 3 puntos, se muestra el mensaje de ganador
             if (puntajeJugador === 3) {
                 alert(`¡Felicidades ${nombreJugador}, ganaste! 🎉`);
                 historialJugador++;
@@ -72,11 +73,11 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         });
     });
-
+//reinicia el juego, el historial o el nombre del jugador
     reiniciarBtn.addEventListener("click", reiniciarJuego);
     resetHistorialBtn.addEventListener("click", resetearHistorial);
     resetNombreBtn.addEventListener("click", resetearNombre);
-
+//funcion para determinar el ganador
     function determinarGanador(jugador, maquina) {
         if (jugador === maquina) return "empate";
         if (
@@ -88,7 +89,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
         return "maquina";
     }
-
+//funcion para reiniciar el juego 
     function reiniciarJuego() {
         puntajeJugador = 0;
         puntajeMaquina = 0;
@@ -98,7 +99,7 @@ document.addEventListener("DOMContentLoaded", () => {
         mensaje.textContent = `Hola ${nombreJugador}, elige tu jugada:`;
         actualizarHistorial();
     }
-
+//funcion para resetear el historial
     function resetearHistorial() {
         historialJugador = 0;
         historialMaquina = 0;
@@ -107,12 +108,12 @@ document.addEventListener("DOMContentLoaded", () => {
         actualizarHistorial();
         alert("Historial reiniciado");
     }
-
+//funcion para resetear el nombre del jugador
     function resetearNombre() {
         localStorage.removeItem("nombreJugador");
         location.reload();
     }
-
+//funcion para actualizar el historial
     function actualizarHistorial() {
         historialJugadorSpan.textContent = historialJugador;
         historialMaquinaSpan.textContent = historialMaquina;
