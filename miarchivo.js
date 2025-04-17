@@ -47,7 +47,7 @@ document.addEventListener("DOMContentLoaded", () => {
         boton.addEventListener("click", () => {
             let jugadaJugador = boton.dataset.jugada;
             let jugadaMaquina = opcionesJuego[Math.floor(Math.random() * opcionesJuego.length)];
-
+            
             resultado.textContent = `Elegiste ${jugadaJugador.toUpperCase()} - La máquina eligió ${jugadaMaquina.toUpperCase()}`;
 
             let ganador = determinarGanador(jugadaJugador, jugadaMaquina);
@@ -61,18 +61,31 @@ document.addEventListener("DOMContentLoaded", () => {
             puntajeMaquinaSpan.textContent = puntajeMaquina;
 //si el jugador o la maquina llegan a 3 puntos, se muestra el mensaje de ganador
             if (puntajeJugador === 3) {
-                alert(`¡Felicidades ${nombreJugador}, ganaste! 🎉`);
+                Swal.fire({
+                    title: '¡Ganaste la ronda!',
+                    text: 'Sos el campeón 🏆',
+                    icon: 'success',
+                    confirmButtonText: 'Seguir jugando'
+                  });
+                  
                 historialJugador++;
                 localStorage.setItem("historialJugador", historialJugador);
                 reiniciarJuego();
             } else if (puntajeMaquina === 3) {
-                alert("La máquina ganó 😢. ¡Suerte la próxima!");
+                Swal.fire({
+                    title: '¡Gano la maquina!',
+                    text: 'Sos un looser 😢',
+                    icon: 'error',
+                    confirmButtonText: 'Seguir jugando'
+                  });
+                  
                 historialMaquina++;
                 localStorage.setItem("historialMaquina", historialMaquina);
                 reiniciarJuego();
             }
         });
     });
+
 //reinicia el juego, el historial o el nombre del jugador
     reiniciarBtn.addEventListener("click", reiniciarJuego);
     resetHistorialBtn.addEventListener("click", resetearHistorial);
@@ -106,7 +119,6 @@ document.addEventListener("DOMContentLoaded", () => {
         localStorage.setItem("historialJugador", 0);
         localStorage.setItem("historialMaquina", 0);
         actualizarHistorial();
-        alert("Historial reiniciado");
     }
 //funcion para resetear el nombre del jugador
     function resetearNombre() {
