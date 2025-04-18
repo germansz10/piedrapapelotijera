@@ -1,41 +1,47 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Piedra, Papel o Tijera</title>
-    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/style.css" />
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
-</head>
-<body>
+  </head>
+  <body>
     <div id="nombreJugador">
-        <h1>Piedra, Papel o Tijera</h1>
-        <p>Bienvenido al juego de piedra, papel o tijera.</p>
-        <p>El primero que gane tres partidas, gana la ronda</p>
-        <p>Ingresa tu nombre para comenzar a jugar</p>
-        <input type="text" id="nombre">
-        <button id="iniciar">Iniciar</button>
+      <h1>Piedra, Papel o Tijera</h1>
+
+      <p>El primero que gane tres partidas, gana la ronda</p>
+      <p>Ingresa tu nombre para comenzar a jugar</p>
+      <input type="text" id="nombre" />
+      <button id="iniciar">Iniciar</button>
     </div>
-    
-    <div id="juego" style="display: none;">
-        <h2 id="mensaje"></h2>
-        <div class="opciones">
-            <button class="opcion" data-jugada="piedra">🪨 Piedra</button>
-            <button class="opcion" data-jugada="papel">📃 Papel</button>
-            <button class="opcion" data-jugada="tijera">✂️ Tijera</button>
-        </div>
-        
-        <p id="resultado"></p>
-        <p>Puntuación: 🧑‍💻 <span id="puntajeJugador">0</span> - 🤖 <span id="puntajeMaquina">0</span></p>
-        <button id="reiniciar">Reiniciar Ronda</button>
+
+    <div id="juego" style="display: none">
+      <h2 id="mensaje"></h2>
+      <div class="opciones">
+        <button class="opcion" data-jugada="piedra">🪨 Piedra</button>
+        <button class="opcion" data-jugada="papel">📃 Papel</button>
+        <button class="opcion" data-jugada="tijera">✂️ Tijera</button>
+      </div>
+
+      <p id="resultado"></p>
+      <p>
+        Puntuación: 🧑‍💻 <span id="puntajeJugador">0</span> - 🤖
+        <span id="puntajeMaquina">0</span>
+      </p>
+      <!-- <button id="reiniciar">Reiniciar Ronda</button>
         <h3>Historial de Victorias</h3>
-        <p>Jugador: <span id="historialJugador">0</span> - Máquina: <span id="historialMaquina">0</span></p>
-        <button id="resetHistorial">Resetear Historial</button>
-        <button id="resetNombre">Reiniciar Jugador</button>
-        <div id="mensajeDinamico"> </div>
+        <p>Jugador: <span id="historialJugador">0</span> - Máquina: <span id="historialMaquina">0</span></p> -->
+      <button id="resetHistorial">Resetear Historial</button>
+      <button id="resetNombre">Nuevo Jugador</button>
+      <!-- <div id="mensajeDinamico"> </div> -->
+      <div id="historialJugadores">
+        <h3>Historial de Jugadores</h3>
+        <ul id="listaHistorial"></ul>
+      </div>
     </div>
-    
+
     <script src="miarchivo.js"></script>
-</body>
+  </body>
 </html>
