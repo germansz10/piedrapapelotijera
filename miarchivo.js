@@ -180,6 +180,7 @@ document.addEventListener("DOMContentLoaded", () => {
     mensaje.textContent = "Ingresa tu nombre para comenzar a jugar";
     document.getElementById("nombreJugador").style.display = "block";
     juegoDiv.style.display = "none";
+    nombreInput.value = "";
   });
 });
 
