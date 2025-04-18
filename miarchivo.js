@@ -38,6 +38,11 @@ document.addEventListener("DOMContentLoaded", () => {
   document.getElementById("nombreJugador").style.display = "block";
   juegoDiv.style.display = "none";
 
+  // Cargar historial desde el JSON externo
+  if (historialAcumulado.length === 0) {
+    cargarHistorialDesdeJSON();
+  }
+
   // Mostrar el historial acumulado al cargar la página
   mostrarHistorial();
 
@@ -180,7 +185,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 // Función para cargar el historial desde un archivo JSON
 function cargarHistorialDesdeJSON() {
-  fetch("./data/historial.json")
+  fetch("https://gist.githubusercontent.com/germansz10/6e496e37c9e3a1098b2afb234e4108f3/raw/d50def4ae0f38ef3262c359cb53ad969bf4e6e75/historial.json")
     .then((response) => {
       if (!response.ok) {
         throw new Error(
