@@ -66,43 +66,55 @@ document.addEventListener("DOMContentLoaded", () => {
   opciones.forEach((boton) => {
     boton.addEventListener("click", () => {
       let jugadaJugador = boton.dataset.jugada;
-      let jugadaMaquina =
-        opcionesJuego[Math.floor(Math.random() * opcionesJuego.length)];
 
-      resultado.textContent = `Elegiste ${jugadaJugador.toUpperCase()} - La máquina eligió ${jugadaMaquina.toUpperCase()}`;
+      // Mostrar la animación de la computadora
+      const animacionMaquina = document.getElementById("animacionMaquina");
+      animacionMaquina.style.display = "block";
 
-      let ganador = determinarGanador(jugadaJugador, jugadaMaquina);
-      if (ganador === "jugador") {
-        puntajeJugador++;
-      } else if (ganador === "maquina") {
-        puntajeMaquina++;
-      }
+      // Simular un retraso antes de mostrar la jugada de la máquina
+      setTimeout(() => {
+        let jugadaMaquina =
+          opcionesJuego[Math.floor(Math.random() * opcionesJuego.length)];
 
-      puntajeJugadorSpan.textContent = puntajeJugador;
-      puntajeMaquinaSpan.textContent = puntajeMaquina;
+        // Ocultar la animación
+        animacionMaquina.style.display = "none";
 
-      // Si el jugador o la máquina llegan a 3 puntos, se muestra el mensaje de ganador
-      if (puntajeJugador === 3) {
-        Swal.fire({
-          title: "¡Ganaste la ronda!",
-          text: "Sos el campeón 🏆",
-          icon: "success",
-          confirmButtonText: "Seguir jugando",
-        });
+        // Mostrar el resultado de la jugada
+        resultado.textContent = `Elegiste ${jugadaJugador.toUpperCase()} - La máquina eligió ${jugadaMaquina.toUpperCase()}`;
 
-        agregarHistorial(nombreJugador, "Ganó");
-        reiniciarJuego();
-      } else if (puntajeMaquina === 3) {
-        Swal.fire({
-          title: "¡Gano la máquina!",
-          text: "Sos un looser 😢",
-          icon: "error",
-          confirmButtonText: "Seguir jugando",
-        });
+        let ganador = determinarGanador(jugadaJugador, jugadaMaquina);
+        if (ganador === "jugador") {
+          puntajeJugador++;
+        } else if (ganador === "maquina") {
+          puntajeMaquina++;
+        }
 
-        agregarHistorial(nombreJugador, "Perdió");
-        reiniciarJuego();
-      }
+        puntajeJugadorSpan.textContent = puntajeJugador;
+        puntajeMaquinaSpan.textContent = puntajeMaquina;
+
+        // Si el jugador o la máquina llegan a 3 puntos, se muestra el mensaje de ganador
+        if (puntajeJugador === 3) {
+          Swal.fire({
+            title: "¡Ganaste la ronda!",
+            text: "Sos el campeón 🏆",
+            icon: "success",
+            confirmButtonText: "Seguir jugando",
+          });
+
+          agregarHistorial(nombreJugador, "Ganó");
+          reiniciarJuego();
+        } else if (puntajeMaquina === 3) {
+          Swal.fire({
+            title: "¡Gano la máquina!",
+            text: "Sos un looser 😢",
+            icon: "error",
+            confirmButtonText: "Seguir jugando",
+          });
+
+          agregarHistorial(nombreJugador, "Perdió");
+          reiniciarJuego();
+        }
+      }, 1000); // Retraso de 1 segundo
     });
   });
 
@@ -186,7 +198,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
 // Función para cargar el historial desde un archivo JSON
 function cargarHistorialDesdeJSON() {
-  fetch("https://gist.githubusercontent.com/germansz10/6e496e37c9e3a1098b2afb234e4108f3/raw/d50def4ae0f38ef3262c359cb53ad969bf4e6e75/historial.json")
+  fetch(
+    "https://gist.githubusercontent.com/germansz10/6e496e37c9e3a1098b2afb234e4108f3/raw/d50def4ae0f38ef3262c359cb53ad969bf4e6e75/historial.json"
+  )
     .then((response) => {
       if (!response.ok) {
         throw new Error(

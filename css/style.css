@@ -127,3 +127,22 @@ button:hover {
   margin-bottom: 5px;
   font-size: 14px;
 }
+
+.animacion-maquina {
+  display: none; /* Oculto por defecto */
+  font-size: 1.5rem;
+  color: #555;
+  text-align: center;
+  margin-top: 20px;
+  animation: parpadeo 1s infinite;
+}
+
+@keyframes parpadeo {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
